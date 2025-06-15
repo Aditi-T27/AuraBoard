@@ -4,8 +4,8 @@ import supabase from "@/dbConfig/clientPage"
 export async function POST(request:NextRequest){
     try{
  const reqBody = await request.json();
- const {name,email}=reqBody;
- if(!name || !email){
+ const {name,email,password}=reqBody;
+ if(!name || !email || !password){
     return NextResponse.json({
         error:"Empty Input, Kindly fill data!"
     },
@@ -14,7 +14,7 @@ export async function POST(request:NextRequest){
 
  const{data,error}= await supabase
   .from("user")
-  .insert([{name,email}])
+  .insert([{name,email,password}])
  
    if(error){
     console.log(error);

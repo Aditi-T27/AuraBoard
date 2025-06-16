@@ -476,16 +476,23 @@ const handleUpdate = async () => {
               </div>
             </div>
             <div className="flex items-center space-x-4">
+                 <p className="text-lg font-semibold text-purple-700 bg-purple-100 px-4 py-2 rounded-lg shadow-md hover:bg-purple-200 transition-colors duration-300">
+    Click to customize the content 👉
+  </p>
+  
               <button
                 onClick={() =>
                   updateState("showSettings", !allValue.showSettings)
                 }
                 className="p-2 text-purple-200 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-200"
               >
-                <Settings className="w-5 h-5" />
-              </button>
-              <button className="p-2 text-purple-200 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-200">
-                <User className="w-5 h-5" />
+                <div className="relative group">
+                  
+  <div className="w-12 h-12 bg-white text-purple-600 rounded-full flex items-center justify-center shadow-lg transition-all duration-300 group-hover:bg-purple-100 group-hover:rotate-90">
+    <Settings className="w-5 h-5 transition-transform duration-300" />
+  </div>
+</div>
+
               </button>
               <button className="p-2 text-purple-200 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-200">
                 <LogOut className="w-5 h-5" />

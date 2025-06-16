@@ -28,7 +28,7 @@ export async function GET(request:NextRequest){
   }
 
   if(data){
-    const titles=data.map((entry:any)=> entry.title);
+    const titles = data.map((entry: unknown) => (entry as { title: string }).title);
     console.log("Titles",titles);
   }
 

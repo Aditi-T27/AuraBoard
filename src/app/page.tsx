@@ -3,9 +3,11 @@ import Banner from "@/components/custom/Banner"
 import { cookies } from "next/headers";
 import {jwtDecode} from "jwt-decode";
 
+
 type MyToken = {
   username: string;
   email: string;
+  id:number;
   iat: number;
   exp: number;
 };
@@ -17,14 +19,16 @@ export default async function Home() {
   const token = cookieStore.get("token")?.value;
   let user=null;
   let  email=null;
+  let id=null;
 
 
     if(token){
       try{
      const decoded = jwtDecode<MyToken>(token);
       console.log(decoded);
-      user=decoded.username;
+       user=decoded.username;
       email=decoded.email;
+      id=decoded.id;
       // console.log(decoded.email);
       }
       catch(err){
@@ -37,8 +41,8 @@ export default async function Home() {
   
   return (
      <div>
-     <Custom_nav username={user}/>
-     <Banner username={user}/>
+     <Custom_nav username={user} email={email} id={id !== null ? String(id) : ""}/>
+     <Banner username={user} email={email} id={id}/>
      </div>
   );
 }

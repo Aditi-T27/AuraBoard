@@ -6,7 +6,7 @@ export async function POST(request: NextRequest) {
   try {
     const reqBody = await request.json();
     const {
-      user_id, // you need to pass this from frontend
+      userId, // you need to pass this from frontend
       title,
       journalContent,
       images, // array of image URLs
@@ -20,7 +20,7 @@ export async function POST(request: NextRequest) {
       .from("journal_entry")
       .insert([
         {
-          user_id: user_id,
+          user_id: userId,
           title: title,
           content: journalContent,
           image_urls: images,

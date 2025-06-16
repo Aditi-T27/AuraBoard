@@ -31,6 +31,7 @@ export async function POST(request:NextRequest){
        return NextResponse.json({ok:false ,success: false, message: 'Password is not matching'});
  
     const tokendata={
+        id:data.id,
         username:data.name,
         email:data.email
     }

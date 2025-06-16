@@ -1,11 +1,14 @@
 // ResponsiveNavbar.tsx
 "use client"
 type CustomeNavProps={
-  username:string|null;
+  username:string|null,
+  email:string|null,
+  id:string,
 }
 import * as React from "react"
 import Link from "next/link"
 import { MenuIcon, XIcon } from "lucide-react"
+import axios from "axios"
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -48,8 +51,21 @@ const components = [
   },
 ]
 
-export default function ResponsiveNavbar({username}:CustomeNavProps) {
+export default function ResponsiveNavbar({username,email,id}:CustomeNavProps) {
   const [isOpen, setIsOpen] = React.useState(false)
+  const [titles, setTitles] = React.useState<string[]>([]);
+  
+//get Titles
+  const onSelect = async () => {
+    const response = await axios.get("/api/users/list", { params: { id } });
+    const data = response.data;
+  
+      if (response.data && response.data.data) {
+      const fetchedTitles = response.data.data.map((entry: any) => entry.title);
+        setTitles(fetchedTitles);
+      }
+    
+  }
 
   return (
     <nav className="w-full bg-gradient-to-r from-purple-900 via-indigo-900 to-purple-800 text-white shadow-2xl z-[999] backdrop-blur-sm border-b border-purple-500/30 relative">
@@ -67,6 +83,7 @@ export default function ResponsiveNavbar({username}:CustomeNavProps) {
             AuraWord
           </span>
         </Link>
+        <button onClick={onSelect}>clk</button>
 
                <Link href="/" className="flex items-center gap-3 hover:scale-110 transition-all duration-300 hover:rotate-1 group">
           <div className="bg-gradient-to-br from-white to-purple-100 rounded-full p-1 shadow-xl ring-4 ring-purple-400/50 group-hover:ring-yellow-400/70 transition-all duration-300">
@@ -93,21 +110,32 @@ export default function ResponsiveNavbar({username}:CustomeNavProps) {
 
         {/* Desktop Menu */}
         <div className="hidden lg:flex">
-          <NavigationLinks />
+          <NavigationLinks titles={titles} onSelect={onSelect} isMobile={false} id={id} />
+
         </div>
       </div>
 
       {/* Mobile Dropdown Menu */}
       {isOpen && (
         <div className="lg:hidden px-6 pb-4 bg-gradient-to-b from-purple-900/95 to-indigo-900/95 backdrop-blur-md border-t border-purple-500/30 z-[999] relative">
-          <NavigationLinks isMobile />
+          <NavigationLinks titles={titles} onSelect={onSelect} isMobile id={id} />
         </div>
       )}
     </nav>
   )
 }
 
-function NavigationLinks({ isMobile = false }: { isMobile?: boolean }) {
+function NavigationLinks({
+  isMobile = false,
+  titles = [],
+  onSelect = () => {},
+  id,
+}: {
+  isMobile?: boolean
+  titles?: string[]
+  onSelect?: () => void
+  id: string
+}) {
   return (
     <NavigationMenu>
       <NavigationMenuList
@@ -167,13 +195,19 @@ function NavigationLinks({ isMobile = false }: { isMobile?: boolean }) {
             📋 List
           </NavigationMenuTrigger>
           <NavigationMenuContent className="bg-gradient-to-br from-white via-purple-50 to-indigo-50 text-black rounded-2xl p-6 shadow-2xl border border-purple-200 backdrop-blur-sm z-[999]">
-            <ul className="grid w-[350px] gap-4">
-              <li className="space-y-2">
-                <NavLink title="🧩 Components" />
-                <NavLink title="📚 Documentation" />
-                <NavLink title="📝 Blog" />
+            <ul className="grid w-[350px] gap-4" onClick={onSelect}>
+          {titles.length === 0 ? (
+            <li className="text-gray-500">Click to load journal titles</li>
+          ) : (
+            titles.map((title, index) => (
+              <Link href={{pathname:"/dashboard",query:{title:title, userId:id}}}>
+              <li key={index} className="space-y-2">
+                {title}
               </li>
-            </ul>
+              </Link>
+            ))
+          )}
+        </ul>
           </NavigationMenuContent>
         </NavigationMenuItem>
       </NavigationMenuList>

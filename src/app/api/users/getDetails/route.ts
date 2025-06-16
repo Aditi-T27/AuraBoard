@@ -56,11 +56,12 @@ const { searchParams } = new URL(request.url);
 
  }
 
- catch(error:any){
-    console.log(error.message);
-    return NextResponse.json({
-        error:error.message
-    },
-    {status:500});
- }
+ catch (error: unknown) {
+    if (error instanceof Error) {
+      console.error("Server error:", error.message);
+    } else {
+      console.error("Server error:", error);
+    }
+    return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+  }
 }

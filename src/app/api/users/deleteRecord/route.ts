@@ -32,8 +32,12 @@ export async function DELETE(request: NextRequest) {
       { success: true, message: "Journal entry deleted successfully" },
       { status: 200 }
     );
-  } catch (err: any) {
-    console.error("Server Error:", err.message);
-    return NextResponse.json({ error: err.message }, { status: 500 });
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      console.error("Server error:", error.message);
+    } else {
+      console.error("Server error:", error);
+    }
+    return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
   }
 }

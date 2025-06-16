@@ -37,8 +37,12 @@ export async function POST(request: NextRequest) {
     }
 
     return NextResponse.json({ message: "Journal saved successfully.", data });
-  } catch (error: any) {
-    console.error("Server error:", error.message);
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      console.error("Server error:", error.message);
+    } else {
+      console.error("Server error:", error);
+    }
     return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
   }
 }

@@ -39,12 +39,12 @@ export default function JournalBanner({username,email,id}:CustomeNavProps) {
       </div>
 
       {/* Main Content */}
-     <div className="relative z-10 flex flex-col items-center justify-center min-h-[calc(100vh-80px)] px-6 py-16">
+     <div className="relative z-10 flex flex-col items-center justify-center min-h-[calc(90vh-80px)] px-6 py-4">
 
-        <div className="max-w-4xl mx-auto text-center space-y-8">
+        <div className="max-w-4xl mx-auto text-center space-y-4">
           
           {/* Main Title */}
-          <div className="space-y-4">
+          <div className="space-y-8">
             <h1 className="text-6xl md:text-8xl font-black tracking-wider text-transparent bg-gradient-to-r from-yellow-300 via-pink-300 to-purple-300 bg-clip-text drop-shadow-2xl animate-pulse font-mono">
               ✨ AuraWord
             </h1>
@@ -125,9 +125,9 @@ export default function JournalBanner({username,email,id}:CustomeNavProps) {
           </div>
 
           {/* Scroll Indicator */}
-          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-            <div className="w-6 h-10 border-2 border-purple-300 rounded-full flex justify-center">
-              <div className="w-1 h-3 bg-gradient-to-b from-purple-300 to-transparent rounded-full mt-2 animate-pulse"></div>
+          <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <div className="w-6 h-8 border-2 border-purple-300 rounded-full flex justify-center">
+              <div className="w-1 h-1 bg-gradient-to-b from-purple-300 to-transparent rounded-full mt-2 animate-pulse"></div>
             </div>
           </div>
         </div>

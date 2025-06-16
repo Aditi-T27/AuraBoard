@@ -27,6 +27,12 @@ export async function DELETE(request: NextRequest) {
         { status: 500 }
       );
     }
+    if(!data){
+       return NextResponse.json(
+        { error: "Error deleting journal entry,no return data" },
+        { status: 500 }
+      );
+    }
 
     return NextResponse.json(
       { success: true, message: "Journal entry deleted successfully" },

@@ -16,6 +16,10 @@ export async function POST(req: Request) {
       upsert: false,
     });
 
+  if(!data){
+      return NextResponse.json({ error: 'No data returned' }, { status: 500 });
+  }
+
   if (error) {
     console.error(error);
     return NextResponse.json({ error: 'Upload failed' }, { status: 500 });

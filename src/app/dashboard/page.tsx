@@ -12,7 +12,6 @@ import {
   AlignRight,
   Save,
   Settings,
-  User,
   LogOut,
   FileText,
 } from "lucide-react";
@@ -61,10 +60,6 @@ export default function Dashboard() {
     email:email
   }
 
-  const updateData={
-    title:title,
-    id:id,
-  }
  
   const [allValue, setAllValue] = useState<AllValue>({
     title: "",

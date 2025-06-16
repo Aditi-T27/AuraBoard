@@ -39,11 +39,16 @@ export default function ResponsiveNavbar({username,email,id}:CustomeNavProps) {
 //get Titles
   const onSelect = async () => {
     const response = await axios.get("/api/users/list", { params: { id } });
-    const data = response.data;
+    // const data = response.data;
   
       if (response.data && response.data.data) {
-      const fetchedTitles = response.data.data.map((entry: any) => entry.title);
-        setTitles(fetchedTitles);
+      const fetchedTitles = response.data.data.map((entry: unknown) => {
+        if (typeof entry === "object" && entry !== null && "title" in entry) {
+          return (entry as { title: string }).title;
+        }
+        return "";
+      });
+      setTitles(fetchedTitles);
       }
     
   }
@@ -312,17 +317,17 @@ function ListItem({
   )
 }
 
-function NavLink({ title }: { title: string }) {
-  return (
-    <NavigationMenuLink asChild>
-      <Link
-        href="#"
-        className="block px-4 py-3 rounded-xl hover:bg-gradient-to-r hover:from-purple-100 hover:to-indigo-100 text-sm transition-all duration-300 hover:scale-105 hover:shadow-md border border-transparent hover:border-purple-200 group"
-      >
-        <div className="font-bold text-purple-800 font-mono tracking-wide group-hover:text-purple-600 transition-colors">
-          {title}
-        </div>
-      </Link>
-    </NavigationMenuLink>
-  )
-}
+// function NavLink({ title }: { title: string }) {
+//   return (
+//     <NavigationMenuLink asChild>
+//       <Link
+//         href="#"
+//         className="block px-4 py-3 rounded-xl hover:bg-gradient-to-r hover:from-purple-100 hover:to-indigo-100 text-sm transition-all duration-300 hover:scale-105 hover:shadow-md border border-transparent hover:border-purple-200 group"
+//       >
+//         <div className="font-bold text-purple-800 font-mono tracking-wide group-hover:text-purple-600 transition-colors">
+//           {title}
+//         </div>
+//       </Link>
+//     </NavigationMenuLink>
+//   )
+// }

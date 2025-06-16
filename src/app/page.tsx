@@ -42,7 +42,7 @@ export default async function Home() {
   return (
      <div>
      <Custom_nav username={user} email={email} id={id !== null ? String(id) : ""}/>
-     <Banner username={user} email={email} id={id}/>
+     <Banner username={user} email={email}/>
      </div>
   );
 }

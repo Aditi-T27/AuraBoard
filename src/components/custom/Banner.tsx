@@ -2,14 +2,12 @@
 type CustomeNavProps={
   username:string|null,
   email:string|null,
-  id:number|null;
-}
+ }
 import React, { useState } from 'react';
 import { PenTool, BookOpen, Sparkles, Heart, Star, Zap } from 'lucide-react';
 import Features  from "@/components/custom/Feature"
 import Link from "next/link"
-import axios from 'axios';
-export default function JournalBanner({username,email,id}:CustomeNavProps) {
+export default function JournalBanner({username,email}:CustomeNavProps) {
   const [isFeaturesOpen, setIsFeaturesOpen] = useState(false);
 
 

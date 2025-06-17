@@ -12,14 +12,14 @@ export async function POST(request:NextRequest){
     {status:500});
 }
 
- const{data,error}= await supabase
+ const{error}= await supabase
   .from("user")
   .insert([{name,email,password}])
  
    if(error){
     console.log(error);
    }
-  console.log(data);
+  // console.log(data);
 
    return NextResponse.json({
         ok:true,

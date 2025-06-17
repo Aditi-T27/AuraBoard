@@ -29,7 +29,7 @@ const { data, error } = await supabase
    if(error){
     console.log(error);
    }
-  console.log(data);
+  // console.log(data);
   
   if (!data) {
     return NextResponse.json({ok:false ,success: false, message: 'User not found'});

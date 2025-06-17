@@ -75,7 +75,7 @@ export default function SignUp(){
    
   const onSignUp= async()=>{
     const response = await axios.post("/api/users/signup",user);
-    console.log(response);
+    // console.log(response);
     if(response.data.ok){
         toast.success("Successfully Created the user, Welcome to the portal!Login to Continue.");
         router.push("/login");

@@ -14,7 +14,7 @@ export async function DELETE(request: NextRequest) {
       );
     }
 
-    const { data, error } = await supabase
+    const { error } = await supabase
       .from("journal_entry")
       .delete()
       .eq("user_id", id)
@@ -24,12 +24,6 @@ export async function DELETE(request: NextRequest) {
       console.error("Supabase Error:", error);
       return NextResponse.json(
         { error: "Error deleting journal entry" },
-        { status: 500 }
-      );
-    }
-    if(!data){
-       return NextResponse.json(
-        { error: "Error deleting journal entry,no return data" },
         { status: 500 }
       );
     }

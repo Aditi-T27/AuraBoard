@@ -17,7 +17,7 @@ export default function Login(){
     const response = await axios.post("/api/users/login",user,{
         withCredentials: true
     });
-    console.log(response);
+    // console.log(response);
     if(response.data.ok){
         toast.success("Welcome back! Login successful!");
         router.push("/");
